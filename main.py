@@ -34,8 +34,8 @@ simple = np.array([
         ])
 
 def main():
-    #board = sudoku.sample_board
-    board = simple
+    board = sudoku.sample_board
+    #board = simple
 
 
     constrained_start = time.time()
@@ -44,6 +44,7 @@ def main():
 
     sudoku.display(result)
     print()
+
     normal_start = time.time()
     result = solver.depth_first_search(board)
     print(f"NORMAL DFS FINISHED IN: {time.time() - normal_start}")

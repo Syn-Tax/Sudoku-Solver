@@ -33,6 +33,7 @@ def depth_first_search(initial_state):
     frontier.append(initial_state)
     frontier_hashed = deque()
     frontier_hashed.append(hash(bytes(initial_state)))
+    print(len(frontier_hashed))
     explored = deque()
 
     while True:
@@ -49,7 +50,7 @@ def depth_first_search(initial_state):
             child = sudoku.move(state, *action)
             child_hash = hash(bytes(child))
 
-            if child_hash not in frontier_hashed and child_hash not in explored == 0:
+            if child_hash not in frontier_hashed and child_hash not in explored:
                 if sudoku.is_goal(child):
                     return child
                 frontier.append(child)
