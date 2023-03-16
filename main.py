@@ -20,7 +20,7 @@ solution = [
 def main():
     board = sudoku.sample_board
 
-    result = solver.depth_first_search(board)
+    result = solver.constrained_dfs(board)
 
     if result:
         sudoku.display(result)
