@@ -19,14 +19,24 @@ solution = [
 
 def main():
     board = sudoku.sample_board
-
+    
+    constrained_start = time.time()
     result = solver.constrained_dfs(board)
+    print(f"CONSTRAINED DFS FINISHED IN: {time.time() - costrained_start}")
 
     if result:
         sudoku.display(result)
     else:
         print("no solution found")
 
+    normal_start = time.time()
+    result = solver.depth_first_search(board)
+    print(f"NORMAL DFS FINISHED IN: {time.time() - normal_start}")
+
+    if result:
+        sudoku.display(result)
+    else:
+        print("no solution found")
 
 if __name__ == "__main__":
     main()
