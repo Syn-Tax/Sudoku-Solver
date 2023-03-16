@@ -33,9 +33,6 @@ def depth_first_search(initial_state):
         for action in actions:
             child = sudoku.move(state, *action)
 
-            sudoku.display(child)
-            print()
-
             if frontier.count(child) == 0 and explored.count(child) == 0:
                 if sudoku.is_goal(child):
                     return child
