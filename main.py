@@ -1,9 +1,10 @@
-import Sudoku
+import sudoku
+import solver
 
 import time
 
 solution = [
-        [5,3,4, 6,7,8, 9,1,2],
+        [5,3,4, 6,0,8, 9,1,2],
         [6,7,2, 1,9,5, 3,4,8],
         [1,9,8, 3,4,2, 5,6,7],
 
@@ -17,13 +18,14 @@ solution = [
         ]
 
 def main():
-    sudoku = Sudoku.Sudoku()
-    sudoku.display()
+    board = sudoku.sample_board
 
-    # performance of is_legal, approx. 58 microseconds on sample board
-    start = time.time()
-    sudoku.is_legal()
-    print((time.time() - start) * 1000_000)
+    result = solver.depth_first_search(board)
+
+    if result:
+        sudoku.display(result)
+    else:
+        print("no solution found")
 
 
 if __name__ == "__main__":
