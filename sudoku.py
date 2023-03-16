@@ -1,7 +1,8 @@
 import copy
+import numpy as np
 
 # sample starting board from wikipedia - https://www.wikiwand.com/en/Sudoku
-sample_board = [
+sample_board = np.array([
                 [5,3,0, 0,7,0, 0,0,0],
                 [6,0,0, 1,9,5, 0,0,0],
                 [0,9,8, 0,0,0, 0,6,0],
@@ -13,7 +14,7 @@ sample_board = [
                 [0,6,0, 0,0,0, 2,8,0],
                 [0,0,0, 4,1,9, 0,0,5],
                 [0,0,0, 0,8,0, 0,7,9]
-                ]
+                ])
 
 def is_legal(board):
     # check rows
@@ -49,7 +50,6 @@ def is_legal(board):
     return True
 
 def is_goal(board):
-    # search for 0's
     for row in range(len(board)):
         for col in range(len(board)):
             if board[row][col] == 0:
@@ -73,6 +73,6 @@ def display(board):
             print("-"*22)
 
 def move(board, row, col, val):
-    temp = copy.deepcopy(board)
+    temp = np.copy(board)
     temp[row][col] = val
     return temp
