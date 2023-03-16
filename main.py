@@ -43,16 +43,12 @@ def main():
     print(f"CONSTRAINED DFS FINISHED IN: {time.time() - constrained_start}")
 
     sudoku.display(result)
-    """
+    print()
     normal_start = time.time()
     result = solver.depth_first_search(board)
     print(f"NORMAL DFS FINISHED IN: {time.time() - normal_start}")
 
-    if result:
-        sudoku.display(result)
-    else:
-        print("no solution found")
-    """
+    sudoku.display(result)
 
 if __name__ == "__main__":
     main()
