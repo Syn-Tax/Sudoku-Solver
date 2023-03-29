@@ -1,38 +1,32 @@
-import copy
 import numpy as np
 
 # sample starting board from wikipedia - https://www.wikiwand.com/en/Sudoku
 sample_board = np.array([
-                [5,3,0, 0,7,0, 0,0,0],
-                [6,0,0, 1,9,5, 0,0,0],
-                [0,9,8, 0,0,0, 0,6,0],
+    [5, 3, 0, 0, 7, 0, 0, 0, 0],
+    [6, 0, 0, 1, 9, 5, 0, 0, 0],
+    [0, 9, 8, 0, 0, 0, 0, 6, 0],
 
-                [8,0,0, 0,6,0, 0,0,3],
-                [4,0,0, 8,0,3, 0,0,1],
-                [7,0,0, 0,2,0, 0,0,6],
-                
-                [0,6,0, 0,0,0, 2,8,0],
-                [0,0,0, 4,1,9, 0,0,5],
-                [0,0,0, 0,8,0, 0,7,9]
-                ])
+    [8, 0, 0, 0, 6, 0, 0, 0, 3],
+    [4, 0, 0, 8, 0, 3, 0, 0, 1],
+    [7, 0, 0, 0, 2, 0, 0, 0, 6],
+
+    [0, 6, 0, 0, 0, 0, 2, 8, 0],
+    [0, 0, 0, 4, 1, 9, 0, 0, 5],
+    [0, 0, 0, 0, 8, 0, 0, 7, 9]
+])
+
 
 def is_legal(board):
     # check rows
     for row in board:
-        # filter empty spaces
-        r = list(filter(lambda x: (x!=0), row))
-        # check for duplicates
-        if len(r) != len(set(r)):
+        if sum(row) != sum(set(row)):
             return False
 
     # check columns
-    cols = [[row[i] for i in range(len(board[0]))] for row in board]
+    cols = np.array(list(zip(*board)))
 
     for col in cols:
-        # filter empty spaces
-        c = list(filter(lambda x: (x!=0), col))
-        # check for duplicates
-        if len(c) != len(set(c)):
+        if sum(col) != sum(set(col)):
             return False
 
     # check boxes
@@ -42,12 +36,11 @@ def is_legal(board):
             for k in range(3):
                 for l in range(3):
                     box.append(board[i*3+k][j*3+l])
-
-            b = list(filter(lambda x: (x!=0), box))
-            if len(b) != len(set(b)):
+            if sum(box) != sum(set(box)):
                 return False
 
     return True
+
 
 def is_goal(board):
     for row in range(len(board)):
@@ -56,6 +49,7 @@ def is_goal(board):
                 return False
 
     return is_legal(board)
+
 
 def display(board):
     for row in range(len(board)):
@@ -71,6 +65,7 @@ def display(board):
         print()
         if row % 3 == 2 and row != 8:
             print("-"*22)
+
 
 def move(board, row, col, val):
     temp = np.copy(board)
